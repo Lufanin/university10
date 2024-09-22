@@ -22,13 +22,12 @@ class Bank:
         for _ in range(100):
             amount = random.randint(50, 500)
             print(f"Запрос на {amount}")
-            with self.lock:
-                if amount <= self.balance:
-                    self.balance -= amount
-                    print(f"Снятие: {amount}. Баланс: {self.balance}")
-                else:
-                    print("Запрос отклонён, недостаточно средств")
-                    self.lock.acquire()  # Блокируем поток при недостатке средств
+            if amount <= self.balance:
+                self.balance -= amount
+                print(f"Снятие: {amount}. Баланс: {self.balance}")
+            else:
+                print("Запрос отклонён, недостаточно средств")
+                self.lock.acquire()  # Блокируем поток при недостатке средств
             time.sleep(0.001)  # Имитация времени выполнения
 
 # Создание объекта класса Bank
