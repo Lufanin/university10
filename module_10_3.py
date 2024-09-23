@@ -15,7 +15,7 @@ class Bank:
             if self.balance >= 500 and self.lock.locked():
                 self.lock.release()
                 print(f"Пополнение: {amount}. Баланс: {self.balance}")
-            time.sleep(0.001)  # Имитация времени выполнения
+        time.sleep(0.001)  # Имитация времени выполнения
 
     def take(self):
         for _ in range(100):
@@ -27,7 +27,8 @@ class Bank:
             else:
                 print("Запрос отклонён, недостаточно средств")
                 self.lock.acquire()  # Блокируем поток при недостатке средств
-            time.sleep(0.001)  # Имитация времени выполнения
+        time.sleep(0.001)  # Имитация времени выполнения
+
 
 # Создание объекта класса Bank
 bk = Bank()
